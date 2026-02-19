@@ -1,5 +1,3 @@
-const { sendNotification } = require("../services/fcm.services");
-
 /**
  * Validate the incoming POST data to check if the user is allowed to log in
  */
