@@ -23,8 +23,9 @@ const sendNotification = async (token, title, body) => {
     const message = {
         notification: {
             title,
-            body
+            body,
         },
+
         token
     };
 
