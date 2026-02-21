@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const loginRoutes = require("./routes/login.routes");
 const signupRoutes = require("./routes/signup.routes");
+const verifyTokenRoutes = require("./routes/verifyToken.routes");
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.get("/health", (_req, res) => {
 
 app.use("/api/", loginRoutes);
 app.use("/api/", signupRoutes);
+app.use("/api/", verifyTokenRoutes);
 
 // Do not move this, keep it at the bottom of the middleware stack, otherwise it won't pick up the 404 errors properly
 app.use((req, res, next) => {
