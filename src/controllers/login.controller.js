@@ -26,11 +26,12 @@ const attemptLogin = async (req, res) => {
                 console.log("Password hash is valid");
 
                 // Generate the access token for the api
-                const token = jwt.sign({ username: username }, 'secret', {
-                    expiresIn: '1h',
+                const token = jwt.sign({ userId : userMatch.userId, emailAddress : userMatch.emailAddress }, process.env.JWT_SECRET, {
+                    expiresIn: '1d',
                 });
 
-                // console.log(jwt.verify(token, 'secret').username);
+                let verifiedJwt = jwt.verify(token, process.env.JWT_SECRET)
+                console.log(`ID: ${verifiedJwt.userId} | Email Address: ${verifiedJwt.emailAddress}`);
 
                 res.status(200).json({
                     userApiKey: token,
