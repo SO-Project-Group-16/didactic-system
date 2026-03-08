@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const prisma = require("../utils/prisma");
 
-const getAllThresholds = async (req, res) => {
+const getThresholds = async (req, res) => {
     const { userApiKey} = req.query;
 
     if (!userApiKey) {
@@ -62,4 +62,4 @@ const getAllThresholds = async (req, res) => {
 
     
 };
-module.exports = { getAllThresholds };
+module.exports = { getThresholds };
