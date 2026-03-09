@@ -72,6 +72,7 @@ model DailyRecord {
   exerciseMinutes Int @default(0)
   height Int @default(-1)
   weight Int @default(-1)
+  userHeartRates UserHeartRate[]
 }
 
 model UserThreshold {
@@ -104,4 +105,13 @@ model UserNotification {
   userId Int
   sent DateTime
   content String
+}
+
+model UserHeartRate {
+  userHeartRateRecordId Int @id @default(autoincrement())
+  dailyRecord DailyRecord @relation(fields: [dailyRecordId], references: [dailyRecordId])
+  dailyRecordId Int
+  hour Int
+  minute Int
+  reading Int
 }
