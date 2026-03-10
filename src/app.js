@@ -8,6 +8,7 @@ const verifyTokenRoutes = require("./routes/verifyToken.routes");
 const updateFcmKeyRoutes = require("./routes/updateFcmKey.routes");
 const userDashboardRoutes = require("./routes/dashboard.routes");
 const getThresholdsRoutes = require("./routes/getThresholds.routes");
+const setThresholdsRoutes = require("./routes/setThresholds.routes");
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use("/api/", verifyTokenRoutes);
 app.use("/api", updateFcmKeyRoutes);
 app.use("/api/", userDashboardRoutes);
 app.use("/api/", getThresholdsRoutes);
+app.use("/api/", setThresholdsRoutes);
 
 // Do not move this, keep it at the bottom of the middleware stack, otherwise it won't pick up the 404 errors properly
 app.use((req, res, next) => {
