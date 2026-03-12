@@ -15,7 +15,7 @@ function formatDate(date) {
 }
 
 const getNotifications = async (req, res) => {
-    const { userApiKey } = req.query;
+    const { userApiKey } = req.body;
 
     if (!userApiKey) {
         return res.status(401).json({
