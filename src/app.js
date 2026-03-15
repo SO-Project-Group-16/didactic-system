@@ -8,6 +8,7 @@ const verifyTokenRoutes = require("./routes/verifyToken.routes");
 const updateFcmKeyRoutes = require("./routes/updateFcmKey.routes");
 const userDashboardRoutes = require("./routes/dashboard.routes");
 const getThresholdsRoutes = require("./routes/getThresholds.routes");
+const dashboardGraphRoutes = require("./routes/dashboardGraph.routes");
 const setThresholdsRoutes = require("./routes/setThresholds.routes");
 const getNotificationsRoutes = require("./routes/getNotifications.routes");
 
@@ -30,6 +31,7 @@ app.use("/api/", verifyTokenRoutes);
 app.use("/api", updateFcmKeyRoutes);
 app.use("/api/", userDashboardRoutes);
 app.use("/api/", getThresholdsRoutes);
+app.use("/api/", dashboardGraphRoutes);
 app.use("/api/", setThresholdsRoutes);
 app.use("/api/", getNotificationsRoutes);
 
