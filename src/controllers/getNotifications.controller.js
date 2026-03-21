@@ -70,19 +70,19 @@ const getNotifications = async (req, res) => {
         
         const result = {};
         for (const notification of notifications) {
+            let isAppointment = true;
+
+            if (!notification.appointmentId){
+                isAppointment = false;
+            }
 
             const item = {
-                appointment: notification.appoitmentId !== null,
+                appointment: isAppointment,
                 sent: formatDate(notification.sent),
                 content: notification.content
             };
-<<<<<<< Updated upstream
-            if (notification.appoitmentId !== null) {
-=======
 
             if (isAppointment) {
-                // This makes appointments include details in the notification so the user knows what to do/where to go
->>>>>>> Stashed changes
                 item["appointment-id"] = notification.appoitmentId;
 
                 // Get the appointment from the db
@@ -98,9 +98,11 @@ const getNotifications = async (req, res) => {
 
             result[notification.notificationId] = item;
         }
+
         return res.status(200).json({
             notifications: result
         });
+
     } catch (err) {
         return res.status(401).json({
             error: "Invalid userApiKey",
@@ -109,4 +111,5 @@ const getNotifications = async (req, res) => {
 
     }
 };
+
 module.exports = { getNotifications };
