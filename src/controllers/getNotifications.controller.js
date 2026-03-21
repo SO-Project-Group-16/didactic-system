@@ -37,21 +37,29 @@ const getNotifications = async (req, res) => {
         
         const result = {};
         for (const notification of notifications) {
+            let isAppointment = true;
+
+            if (!notification.appointmentId){
+                isAppointment = false;
+            }
 
             const item = {
-                appointment: notification.appoitmentId !== null,
+                appointment: isAppointment,
                 sent: formatDate(notification.sent),
                 content: notification.content
             };
-            if (notification.appoitmentId !== null) {
+
+            if (isAppointment) {
                 item["appointment-id"] = notification.appoitmentId;
             }
 
             result[notification.notificationId] = item;
         }
+
         return res.status(200).json({
             notifications: result
         });
+
     } catch (err) {
         return res.status(401).json({
             error: "Invalid userApiKey",
@@ -60,4 +68,5 @@ const getNotifications = async (req, res) => {
 
     }
 };
+
 module.exports = { getNotifications };
