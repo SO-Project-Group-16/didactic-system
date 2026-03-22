@@ -18,24 +18,7 @@
         <main class="web-shell dashboard-shell">
             <aside class="panel patient-panel">
                 <h2 class="panel-title">Assigned Patients</h2>
-                <div id="patientList" class="patient-list">
-                    <button class="patient-card active" data-name="example1" data-email="example1@email.com">
-                        <div class="patient-card-name">example1</div>
-                        <div class="patient-card-sub">Heart rate, steps, blood pressure</div>
-                    </button>
-                </div>
-                <div id="patientList" class="patient-list">
-                    <button class="patient-card active" data-name="example2" data-email="example2@email.com">
-                        <div class="patient-card-name">example2</div>
-                        <div class="patient-card-sub">Calories, activity, alerts</div>
-                    </button>
-                </div>
-                <div id="patientList" class="patient-list">
-                    <button class="patient-card active" data-name="example3" data-email="example3@email.com">
-                        <div class="patient-card-name">example3</div>
-                        <div class="patient-card-sub">Abnormal reading</div>
-                    </button>
-                </div>        
+                <div id="patientList" class="patient-list"></div>        
 
             </aside>
             <section class="panel content-panel">
@@ -47,21 +30,24 @@
                 </div>
                 <section id="biomarkerOverview" class="web-biomarker-overview">
                     <h2 id="bioTitle">Latest Biomarkers</h2>
-                    <div id="bioCard bioCard--active">
-                        <div class="bioLabel">Heart Rate</div>
-                        <div id="patientHeartRate" class="bioValue bioValue--active">75 bpm</div>
-                    </div>
-                    <div id="bioCard bioCard">
-                        <div class="bioLabel">Steps</div>
-                        <div id="patientSteps class="bioValue">7,542</div>
-                    </div>
-                    <div id="bioCard bioCard">
-                        <div class="bioLabel">Blood Pressure</div>
-                        <div id="patientBp" class="bioValue">120/80</div>
-                    </div>
-                    <div id="bioCard bioCard">
-                        <div class="bioLabel">Calories</div>
-                        <div id="patientCalories" class="bioValue">1,840</div>
+
+                    <div id="bioCards">
+                        <div id="bioCard bioCard--active">
+                            <div class="bioLabel">Heart Rate</div>
+                            <div id="patientHeartRate" class="bioValue bioValue--active">-</div>
+                        </div>
+                        <div id="bioCard bioCard">
+                            <div class="bioLabel">Steps</div>
+                            <div id="patientSteps" class="bioValue">-</div>
+                        </div>
+                        <div id="bioCard bioCard">
+                            <div class="bioLabel">Blood Pressure</div>
+                            <div id="patientBp" class="bioValue">-</div>
+                        </div>
+                        <div id="bioCard bioCard">
+                            <div class="bioLabel">Calories</div>
+                            <div id="patientCalories" class="bioValue">-</div>
+                        </div>
                     </div>
                 </section>
                 <section id="graphSection">

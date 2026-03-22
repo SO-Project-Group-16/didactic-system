@@ -26,12 +26,31 @@ model User {
   dailyRecords DailyRecord[]
   userThresholds UserThreshold?
   notifications UserNotification[]
+
+  clinicianLinks ClinicianPatient[]
 }
 
 model Clinician {
   clinicianId Int @id @default(autoincrement())
   name String
+  emailAddress String? @unique
+  pwHash String?
+
   appointments Appointment[]
+  patientLinks ClinicianPatient[]
+}
+model ClinicianPatient {
+  clinicianPatientId Int @id @default(autoincrement())
+
+  clinician Clinician @relation(fields: [clinicianId], references: [clinicianId])
+  clinicianId Int
+
+  patient User @relation(fields: [patientId], references: [userId])
+  patientId Int
+
+  assignedAt DateTime @default(now())
+
+  @@unique([clinicianId, patientId])
 }
 
 model Appointment {
