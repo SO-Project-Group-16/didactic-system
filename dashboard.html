@@ -75,6 +75,26 @@
                     <textarea class="notes-box" placeholder="Add observations or notes about this patient..."></textarea>
                     <button class="primary-btn">Save Notes</button>
                 </section>
+                <section class="panel appointment-panel">
+                    <h2 class="panel-title">Schedule Appointment</h2>
+                    <label for="appointmentPurpose">Purpose</label>
+                    <input id="appointmentPurpose" type="text" placeholder="e.g. Blood pressure review">
+
+                    <label for="appointmentLocation">Location</label>
+                    <input id="appointmentLocation" type="text" placeholder="e.g. Clinic Room 2">
+
+                    <label for="appointmentDatetime">Date and time</label>
+                    <input id="appointmentDatetime" type="datetime-local">
+
+                    <label for="appointmentRequirements">Requirements</label>
+                    <textarea id="appointmentRequirements" class="notes-box" placeholder="e.g. Bring medication list"></textarea>
+                    
+                    <label for="appointmentNotes">Notes</label>
+                    <textarea id="appointmentNotes" class="notes-box" placeholder="Extra notes..."></textarea>
+
+                    <button id="createAppointmentBtn" class="primary-btn">Create Appointment</button>
+                    <p id="appointmentMessage"></p>
+                </section>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="js/dashboard.js"></script>

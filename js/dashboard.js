@@ -13,6 +13,14 @@ const graphSubtitle = document.getElementById("graphSubtitle");
 const graphRangeButtons = document.querySelectorAll(".graphRangeBtn");
 const graphCanvas = document.getElementById("clinicianBiomarkerGraph");
 
+const appointmentPurpose = document.getElementById("appointmentPurpose");
+const appointmentLocation = document.getElementById("appointmentLocation");
+const appointmentDatetime = document.getElementById("appointmentDatetime");
+const appointmentRequirements = document.getElementById("appointmentRequirements");
+const appointmentNotes = document.getElementById("appointmentNotes");
+const createAppointmentBtn = document.getElementById("createAppointmentBtn");
+const appointmentMessage = document.getElementById("appointmentMessage");
+
 const clinicianApiKey = localStorage.getItem("clinicianApiKey");
 
 let selectedPatientId = null;
@@ -281,6 +289,58 @@ logoutBtn?.addEventListener("click", () => {
   localStorage.removeItem("clinicianApiKey");
   localStorage.removeItem("clinicianEmail");
   window.location.href = "index.html";
+});
+
+createAppointmentBtn?.addEventListener("click", async() => {
+    if (!selectedPatientId) {
+        appointmentMessage.textContent = "Please select a patient first.";
+        return;
+    }
+
+    const purpose = appointmentPurpose.value.trim(); 
+    const location = appointmentLocation.value.trim();
+    const datetime = appointmentDatetime.value.trim();
+    const requirements = appointmentRequirements.value.trim();
+    const notes = appointmentNotes.value.trim();
+
+    if (!purpose || !location || !datetime) {
+        appointmentMessage.textContent = "Purpose, location, and date/time are required";
+        return;
+    }
+
+    try{
+        const response = await fetch("http://localhost:3000/api/clinician/appointment/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userApiKey: clinicianApiKey,
+                patientId: selectedPatientId,
+                purpose,
+                location,
+                datetime,
+                requirements,
+                notes
+            })
+        });
+        const data = await response.json();
+        if (!response.ok){
+            appointmentMessage.textContent = data.message || "Unable to create appointment";
+            return;
+        }
+        appointmentMessage.textContent = "Appointment created successfully.";
+        
+        appointmentPurpose.value = "";
+        appointmentLocation.value = "";
+        appointmentDatetime.value = "";
+        appointmentRequirements.value = "";
+        appointmentNotes.value = ""
+
+    } catch (error){
+        console.error(error);
+        appointmentMessage.textContent = "Unable to create appointment";
+    }
 });
 
 loadPatients();

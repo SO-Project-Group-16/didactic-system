@@ -74,7 +74,7 @@ const getGraphData = async (req, res) => {
                     }
                 });
                 break;
-
+        
             case 1:
                 values = await prisma.dailyRecord.findMany({
                     where: {

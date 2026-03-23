@@ -358,3 +358,28 @@ p {
     width: calc(100% - 20px);
   }
 }
+.appointment-panel label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: rgba(232, 232, 232, 0.75);
+}
+
+.appointment-panel input,
+.appointment-panel textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background-color: rgb(48, 48, 48);
+  color: rgb(232, 232, 232);
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+#appointmentMessage {
+  margin-top: 12px;
+  color: rgba(255,255,255,0.8);
+}

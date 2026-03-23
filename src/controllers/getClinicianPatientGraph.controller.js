@@ -47,7 +47,7 @@ const getClinicianPatientGraph = async (req, res) => {
                 message: `dateFrame must be like 7d, 2w, 1m, 1y. Received: ${dateFrame}`
             });
         }
-
+        // check the amount of days of data needed
         const daysToGrab = convertDateFrameToDays(dateFrame);
 
         const startDate = new Date();
@@ -57,7 +57,7 @@ const getClinicianPatientGraph = async (req, res) => {
         let data = [];
         switch (Number(type)) {
             case 0: {
-                // Heart rate
+                // Heart rate, uses the userHeartRates table along with dailyRecords
                 const records = await prisma.dailyRecord.findMany({
                     where: {
                         userId: Number(patientId),
@@ -154,10 +154,11 @@ const getClinicianPatientGraph = async (req, res) => {
                 break;
             }
         }
-    console.log("patientId =", patientId);
-    console.log("type =", type);
-    console.log("dateFrame =", dateFrame);
-    console.log("data =", data);
+        // debugging
+        console.log("patientId =", patientId);
+        console.log("type =", type);
+        console.log("dateFrame =", dateFrame);
+        console.log("data =", data);
 
         return res.status(200).json({
             data
@@ -176,7 +177,6 @@ const getClinicianPatientGraph = async (req, res) => {
 function isBiometricTypeValid(type) {
     return Number(type) >= 0 && Number(type) <= 3;
 }
-
 function isDateFrameValid(dateFrame) {
     const unit = dateFrame.at(-1);
     const numberPart = dateFrame.slice(0, -1);

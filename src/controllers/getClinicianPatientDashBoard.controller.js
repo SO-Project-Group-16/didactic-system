@@ -20,7 +20,7 @@ const getClinicianPatientDashboard = async (req, res) => {
                 message: "Clinician token required"
             });
         }
-
+        // link clinician to patient
         const link = await prisma.clinicianPatient.findFirst({
             where: {
                 clinicianId: decoded.clinicianId,
@@ -34,7 +34,7 @@ const getClinicianPatientDashboard = async (req, res) => {
                 message: "Clinician not assigned to this patient"
             });
         }
-
+        // find patients latest biomarker data
         const latestRecord = await prisma.dailyRecord.findFirst({
             where: {
                 userId: patientId
@@ -53,7 +53,6 @@ const getClinicianPatientDashboard = async (req, res) => {
                 calories: 0
             });
         }
-
         const latestHeartRate = await prisma.userHeartRate.findFirst({
             where: {
                 dailyRecordId: latestRecord.dailyRecordId
@@ -63,7 +62,7 @@ const getClinicianPatientDashboard = async (req, res) => {
                 { minute: "desc" }
             ]
         });
-
+        // display all biomarker data
         return res.status(200).json({
             heartRate: latestHeartRate ? latestHeartRate.reading : null,
             steps: latestRecord.steps,
@@ -71,7 +70,7 @@ const getClinicianPatientDashboard = async (req, res) => {
             diastolic: latestRecord.diastolic,
             calories: latestRecord.calories
         });
-
+        
     } catch (err) {
         return res.status(401).json({
             error: "Invalid userApiKey",
