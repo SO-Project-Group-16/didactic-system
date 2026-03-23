@@ -32,6 +32,7 @@ if (!clinicianApiKey) {
     window.location.href = "index.html";
 }
 
+// Loads the clinicians patients from the database
 async function loadPatients(){
     try{
         const response = await fetch("http://localhost:3000/api/clinician/patients", {
@@ -57,6 +58,7 @@ async function loadPatients(){
         console.error(error);
     }
 }
+// displays patients on the banner on the left 
 function renderPatients(patients) {
   patientList.innerHTML = "";
 
@@ -72,7 +74,7 @@ function renderPatients(patients) {
       <div class="patient-card-name">${patient.name || patient.emailAddress || "Unknown Patiemnt"}</div>
       <div class="patient-card-sub">${patient.summary || "View biomarker data"}</div>
     `;
-
+    // allows clinician to select patient
     button.addEventListener("click", () => {
       document.querySelectorAll(".patient-card").forEach(c => c.classList.remove("active"));
       button.classList.add("active");
@@ -94,6 +96,7 @@ function renderPatients(patients) {
     loadGraphData(first.userId, selectedBiomarkerType, selectedDateFrame);
   }
 }
+// Loads active patients biomarkers from database then displays on web page
 async function loadPatientBiomarkers(userId) {
     try {
         const response = await fetch("http://localhost:3000/api/clinician/patients/dashboard", {
@@ -132,6 +135,7 @@ async function loadPatientBiomarkers(userId) {
         console.error(error);
     }
 }
+// loads data for graph from database
 async function loadGraphData(patientId, type, dateFrame){
     try {
         console.log("Sending graph request:", {patientId, type, dateFrame});
@@ -159,6 +163,7 @@ async function loadGraphData(patientId, type, dateFrame){
         renderEmptyChart();
     }
 }
+// displays which chart is currently selected
 function renderChart(type, graphData){
     const ctx = graphCanvas.getContext("2d");
 
@@ -225,6 +230,7 @@ function renderChart(type, graphData){
         }
     });
 }
+// If data is empty etc then display an empty chart
 function renderEmptyChart() {
     const ctx = graphCanvas.getContext("2d");
 
@@ -291,6 +297,7 @@ logoutBtn?.addEventListener("click", () => {
   window.location.href = "index.html";
 });
 
+// create appointment logic
 createAppointmentBtn?.addEventListener("click", async() => {
     if (!selectedPatientId) {
         appointmentMessage.textContent = "Please select a patient first.";
